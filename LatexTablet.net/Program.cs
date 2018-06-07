@@ -46,7 +46,9 @@ namespace LatexTablet.net
         XPathDocument myXPathDocument = new XPathDocument(sr);
         XslTransform myXslTransform = new XslTransform();
         XmlTextWriter writer = new XmlTextWriter(sw);
-        myXslTransform.Load("./mmltex.xsl");
+        string mmltexpath = System.Reflection.Assembly.GetEntryAssembly().Location;
+        mmltexpath = mmltexpath.Replace("TeXTablet.exe", "mmltex.xsl");
+        myXslTransform.Load(mmltexpath);
         myXslTransform.Transform(myXPathDocument, null, writer);
         writer.Close();
         string latex = sw.ToString();
